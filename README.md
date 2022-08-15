@@ -215,6 +215,50 @@ To visualize the information contained in different datasets, after it has been 
 python3 demos/display_datasets/display_datasets.py <dataset>   
 ```
 
+**For example, replace `<dataset>` in the above command with `kitti` to visualise KITTI dataset.
+Note that if you encounter errors that you don't have datasets as below, modify the `./demos/display_datasets/config.yaml` to disable datasets that you don't have.**
+
+```AssertionError: Path /data/vidar/DDAD_tiny/ddad_tiny.json does not exist
+```
+
+For example, modified `./demos/display_datasets/config.yaml` would be like:
+
+```
+# To download datasets use the following command:
+# wget https://tri-ml-public.s3.amazonaws.com/github/vidar/datasets/{DATASET}.tar /data/vidar
+# Don't forget to untar it afterwards, with:
+# tar xvf /data/vidar/{DATASET}.tar -C /data/vidar
+
+datasets:
+    kitti:
+        name: [KITTI]
+        path: [/data/vidar/KITTI_tiny]
+        split: [kitti_tiny.txt]
+        context: [-1,3]
+        cameras: [[0,1]]
+        labels: [depth,pose]
+        labels_context: [depth, pose]
+        depth_type: [velodyne]
+    # vkitti2:
+    #     name: [VKITTI2]
+    #     path: [/data/vidar/VKITTI2_tiny]
+    #     split: [train]
+    #     context: [-2,2]
+    #     cameras: [[0,1]]
+    #     labels: [depth,pose,optical_flow]
+    #     labels_context: [depth,pose,optical_flow]
+    # ddad:
+    #     name: [Ouroboros]
+    #     path: [/data/vidar/DDAD_tiny/ddad_tiny.json]
+    #     split: [train]
+    #     context: [-1,3]
+    #     cameras: [[1,5,6,7,8,9]]
+    #     labels: [depth,pose]
+    #     labels_context: [depth,pose]
+    #     depth_type: [lidar]
+    #     virtual: [False]
+```
+
 Some examples of visualization results you will generate for KITTI and DDAD are shown below (more examples can be found in the demo configuration file `demos/display_datasets/config.yaml`):
 
 <img align="center" src="/media/figs/camviz_kitti.jpg" width="100%"/>
